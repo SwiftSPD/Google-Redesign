@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Google Search - Redesign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="phone">
+  <div id="main-wrapper" class="fancy-scrollbar">
+    <div id="main">
+      <div id="content">
+        <div id="links-container">
+          <a href="https://images.google.com/">Images</a>
+          <a href="https://mail.google.com/mail/u/0/">Gmail</a>
+          <a href="https://store.google.com/regionpicker?pli=1">Store</a>
+          <a href="https://about.google/">About</a>
+          
+        </div>
+        <div id="header-container">
+          <img id="logo" src="https://assets.codepen.io/1468070/Google+Doodle.png" alt="Google Doodle" />
+        </div>
+        <div id="search-container">
+          <div id="search-input-container">
+            <img src="https://assets.codepen.io/1468070/Google+G+Icon.png" alt="" /
+            <form class="search-form" action="https://www.google.com/search" ="get" target="_blank">
+  <input type="text" name="q" placeholder="Search Anything" />
+</form>
+
+            
+          
+              <form action="https://www.google.com/search" method="GET">
+          </div>
+          <button id="mic-button" type="button">
+            <i class="fa-regular fa-microphone"></i>
+          </button>
+          <button id="image-button" type="button">
+            <i class="fa-regular fa-camera"></i>
+          </button>
+        </div>
+        <div id="apps-container">
+          <a href="https://codepen.io" target="_blank">
+            <i class="fa-brands fa-codepen"></i>
+            <div class="label">
+              <span class="name">Your Work - CodePen</span>
+              <span class="url">codepen.io</span>
+            </div>
+          </a>
+          <a href="https://m.youtube.com" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+            <div class="label">
+              <span class="name">YouTube</span>
+              <span class="url">youtube.com</span>
+            </div>
+          </a>
+          <a href="https://spotify.com" target="_blank">
+            <i class="fa-brands fa-spotify"></i>
+            <div class="label">
+              <span class="name">Spotify</span>
+              <span class="url">spotify.com</span>
+            </div>
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <i class="fa-brands fa-twitter" target="_blank"></i>
+            <div class="label">
+              <span class="name">Twitter</span>
+              <span class="url">twitter.com</span>
+            </div>
+          </a>
+          <a href="https://airbnb.com" target="_blank">
+            <i class="fa-brands fa-airbnb"></i>
+            <div class="label">
+              <span class="name">Airbnb</span>
+              <span class="url">airbnb.com</span>
+            </div>
+          </a>
+          <a href="https://wikipedia.com" target="_blank">
+            <i class="fa-brands fa-wikipedia-w"></i>
+            <div class="label">
+              <span class="name">Wikipedia</span>
+              <span class="url">wikipedia.com</span>
+            </div>
+          </a>
+          <a href="https://github.com" target="_blank">
+            <i class="fa-brands fa-github"></i>
+            <div class="label">
+              <span class="name">Github</span>
+              <span class="url">github.com</span>
+            </div>
+          </a>
+          <a href="https://xbox.com" target="_blank">
+            <i class="fa-brands fa-xbox"></i>
+            <div class="label">
+              <span class="name">Xbox</span>
+              <span class="url">xbox.com</span>
+            </div>
+          </a>
+          
+          
+        </div>
+        <div id="discover-container">
+          <div id="discover-toggles">
+            <button type="button">Discover</button>
+           <a href="https://reuters.com" target="_blank"><button type="button" id="button2">Following</button></a>
+           
+          </div>
+          
+          <div id="discover-feed">
+           
+            <a href="#" class="discover-card">
+               <img src="https://images.unsplash.com/photo-1606567595334-d39972c85dbe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" />
+              <div class="discover-card-info">
+                <p class="title">Research team spends 37 years attempting to establish human-to-bird communication.</p>
+                <p class="desc">They say they are just days away from unlocking the key to "Eep, eep" and "Chirp".</p>
+              
+              
+              </div>
+              
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://codepen.io/Hyperplexed/pen/xxYJYjM/54407644e24173ad6019b766443bf2a6.js'></script>
+  <script>
+    document.getElementById('mic-button').addEventListener('click', function() {
+    // Trigger Google voice typing
+    if ('webkitSpeechRecognition' in window) {
+      var recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+      recognition.start();
+      
+      recognition.onresult = function(event) {
+        var transcript = event.results[0][0].transcript;
+        performSearch(transcript);
+      };
+      
+      recognition.onend = function() {
+        recognition.stop();
+      };
+    } else {
+      alert('Speech recognition is not supported in your browser.');
+    }
+  });
+
+  document.getElementById('image-button').addEventListener('click', function() {
+    // Redirect to Google Lens
+    window.location.href = 'https://lens.google/';
+  });
+
+  function performSearch(query) {
+    // Construct the Google search URL with the query
+    const searchURL = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  
+    // Redirect the user to the Google search
+    window.location.href = searchURL;
+  }
+
+  </script>
+  <style>
+  .search-form {
+    display: inline-block;
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+  }
+  h1, h2, h3, h4, input, select, button, span, a, p {
+  color: rgb(var(--font-color));
+  font-family: "Noto Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0px;
+}
+
+button, a, input {  
+  outline: none;
+}
+
+  .search-form input[type="text"] {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    width: 155px;
+    background-color: rgb(var(--theme-medium));
+  color: rgb(255 255 255 / 80%);
+  font-size: 1rem;
+  border: none;
+  }
+  
+  .search-form input[type="submit"] {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #button2 {
+width: 30%;
+  display: flex; 
+  background-color: rgb(var(--theme-medium));
+  margin: auto;
+  border-radius: 1rem;
+flex-grow: 1;
+  background-color: transparent;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 0.8rem;
+  cursor: pointer;
+    background-color: transparent;
+  color: white;
+  padding: 16px 32px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: none;
+  width : 350px;
+  max-width: 230px;
+}
+
+/* Media query for screens with a width of 768px or larger */
+</style>
+
+<p>
+BY HYPERPLEXED (MODIFIED BY TECHISTORIAN) 
+</p>
+
+</body>
+</html>
